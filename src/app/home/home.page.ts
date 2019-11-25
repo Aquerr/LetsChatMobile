@@ -11,19 +11,14 @@ export class HomePage {
 
     constructor(public modalController: ModalController, public alertController: AlertController) {}
 
-    async testMethod() {
-        const alert = await this.alertController.create({
-            header: 'ALERT!',
-            subHeader: 'SEX',
-            buttons: ['OK']
-        });
-        await alert.present();
-    }
-
     async showLogin() {
         const modal = await this.modalController.create({
             component: LoginModalPage
         });
         return await modal.present();
+    }
+
+    showRegister() {
+
     }
 }

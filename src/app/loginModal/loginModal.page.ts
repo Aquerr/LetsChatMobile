@@ -1,48 +1,70 @@
-import {Component, OnInit} from '@angular/core';
-import {LoadingController, ModalController} from '@ionic/angular';
-import { HTTP } from '@ionic-native/http/ngx';
+import {Component} from '@angular/core';
+import {AlertController, LoadingController, ModalController, NavController} from '@ionic/angular';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../services/auth/auth.service';
 
 @Component({
-  selector: 'login-modal',
-  templateUrl: './loginModal.page.html',
-  styleUrls: ['./loginModal.page.scss'],
+    selector: 'login-modal',
+    templateUrl: './loginModal.page.html',
+    styleUrls: ['./loginModal.page.scss'],
 })
-export class LoginModalPage implements OnInit {
+export class LoginModalPage {
 
-  constructor(public modalController: ModalController, public loadingController: LoadingController, private http: HTTP) {
+  username: string;
+  password: string;
+  loader: any;
 
-  }
+    constructor(public alertController: AlertController, public modalController: ModalController, public loadingController: LoadingController,
+                public httpClient: HttpClient, private authService: AuthService, private navController: NavController) {
 
+    }
 
-  ngOnInit() {
-  }
+    cancelLogin() {
+        this.modalController.dismiss({
+            dismissed: true
+        });
+    }
 
-  cancelLogin() {
-    this.modalController.dismiss({
-      dismissed: true
-    });
-  }
+    async presentLoading(message: string) {
+        this.loader = await this.loadingController.create({
+            message,
+            duration: undefined
+        });
+        this.loader.present();
+    }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Logowanie...',
-      duration: 2000
-    });
-    await loading.present;
+    async dismissLoading() {
+        await this.loader.dismiss();
+    }
 
-    const { role, data } = await loading.onDidDismiss();
+    async login(form: NgForm) {
+        await this.presentLoading('Logowanie...');
 
-    console.log('Loading dismissed!');
-  }
+        console.log('Form username: ' + form.value.username);
+        console.log('Form password: ' + form.value.password);
 
-  async login() {
-    await this.presentLoading();
+        this.authService.login(form.value.username, form.value.password).subscribe(async (response) => {
 
-    const credentials = { username: '', password: ''};
-    credentials.username = 'Nerdi';
-    credentials.password = 'brzuszek';
+            await this.dismissLoading();
+            // Preform logging here...
+            console.log(response);
 
-    const response = await this.http.post('https://secretchat.bartlomiejstepien.pl/login', credentials, null);
-    console.log(response);
-  }
+            // Close login modal
+            await this.modalController.dismiss({
+                dismissed: true
+            });
+            // TODO: Open main LetsChat page.
+
+        }, (async error => {
+            await this.dismissLoading();
+            const alert = await this.alertController.create({
+                header: 'Błąd!',
+                subHeader: 'Logowanie nie powiodło się.'
+            });
+
+            await alert.present();
+            console.log(error);
+        }));
+    }
 }

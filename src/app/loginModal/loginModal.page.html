@@ -2,27 +2,22 @@
   <ion-toolbar>
     <ion-title>Zaloguj się</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="cancelLogin()">Cofnij</ion-button>
+      <ion-button color="primary" (click)="cancelLogin()">Cofnij</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label position="floating">
-      <h2>Nazwa Użytkownika/Email</h2>
-    </ion-label>
-    <ion-input id="username" name="username" type="text" placeholder="Nazwa użytkownika"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">
-      <h2>Hasło</h2>
-    </ion-label>
-    <ion-input id="password" name="password" type="password" placeholder="Hasło"></ion-input>
-  </ion-item>
+<ion-content padding>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" method="post">
+    <ion-item style="border: solid #3880ff 1px; border-radius: 10px;">
+      <ion-input #usernameField id="username" name="username" type="text" placeholder="Nazwa użytkownika" required ngModel (keyup.enter)="passwordField.setFocus()"></ion-input>
+    </ion-item>
+    <ion-item style="border-bottom: solid #3880ff 1px; border-right: solid #3880ff 1px; border-left: solid #3880ff 1px; border-radius: 10px;">
+      <ion-input #passwordField id="password" name="password" type="password" placeholder="Hasło" required ngModel (keyup.enter)="login(loginForm)"></ion-input>
+    </ion-item>
 
-  <div text-center style="width: 250px; margin-left: auto; margin-right: auto; bottom: 30px;">
-    <ion-button style="position: absolute; bottom: 20px; width: 250px; display: block" (click)="login()">Zaloguj</ion-button>
-  </div>
-
+    <div text-center style="width: 250px; margin-left: auto; margin-right: auto; bottom: 50px;">
+      <ion-button type="submit" style="position: absolute; bottom: 20px; width: 250px; display: block">Zaloguj</ion-button>
+    </div>
+  </form>
 </ion-content>
