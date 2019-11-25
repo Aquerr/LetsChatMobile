@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Zaloguj się</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelLogin()">Cofnij</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">
+      <h2>Nazwa Użytkownika/Email</h2>
+    </ion-label>
+    <ion-input id="username" name="username" type="text" placeholder="Nazwa użytkownika"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <h2>Hasło</h2>
+    </ion-label>
+    <ion-input id="password" name="password" type="password" placeholder="Hasło"></ion-input>
+  </ion-item>
+
+  <div text-center style="width: 250px; margin-left: auto; margin-right: auto; bottom: 30px;">
+    <ion-button style="position: absolute; bottom: 20px; width: 250px; display: block" (click)="login()">Zaloguj</ion-button>
+  </div>
+
+</ion-content>

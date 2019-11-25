@@ -1,5 +1,8 @@
 {
   "name": "LestChatMobile",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "f7c2f186"
 }

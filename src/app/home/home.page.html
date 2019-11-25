@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-header>
+        <ion-row margin-top="50px" margin-bottom="50px">
+            <ion-col text-center>
+                <h1 style="font-size: 2.5rem">LetsChat <ion-icon name="chatboxes"></ion-icon></h1>
+            </ion-col>
+        </ion-row>
+    </ion-header>
+    <div text-center margin="auto">
+        <div>Zaloguj się lub wyszukaj osobę do anonimowego czatu.</div>
+    </div>
+    <div text-center style="width: 250px; margin-left: auto; margin-right: auto; margin-top: 220px;">
+        <ion-button style="width: 250px; display: block" (click)="showLogin()">Zaloguj się</ion-button>
+        <ion-button style="width: 250px; display: block; margin-top: 5px" href="#" color="medium">Wyszukaj</ion-button>
+    </div>
+</ion-content>
