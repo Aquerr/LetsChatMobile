@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mój Profil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-avatar style="width: 150px; height: 150px; margin: auto">
+      <img [src]="user.avatar" *ngIf="user.avatar" alt="no-image">
+    </ion-avatar>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      
+    </ion-label>
+  </ion-item>
+</ion-content>

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AlertController, LoadingController, ModalController, NavController} from '@ionic/angular';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../services/auth/auth.service';
 
@@ -11,9 +11,9 @@ import {AuthService} from '../services/auth/auth.service';
 })
 export class LoginModalPage {
 
-  username: string;
-  password: string;
-  loader: any;
+    username: string;
+    password: string;
+    loader: any;
 
     constructor(public alertController: AlertController, public modalController: ModalController, public loadingController: LoadingController,
                 public httpClient: HttpClient, private authService: AuthService, private navController: NavController) {
@@ -55,12 +55,14 @@ export class LoginModalPage {
                 dismissed: true
             });
             // TODO: Open main LetsChat page.
+            await this.navController.navigateRoot('myprofile');
 
         }, (async error => {
             await this.dismissLoading();
             const alert = await this.alertController.create({
                 header: 'Błąd!',
-                subHeader: 'Logowanie nie powiodło się.'
+                subHeader: 'Podane przez Ciebie dane nie pasują do żadnego konta w naszym systemie.',
+                buttons: ['OK']
             });
 
             await alert.present();
